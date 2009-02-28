@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: "Uw Ruby Course"
+  website_url: "http://uwruby.com"
+  description: "A fine class of good people."
+
+two:
+  name: "Portland Ruby Weenies"
+  website_url:
+  description:
