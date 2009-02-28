@@ -1,7 +1,7 @@
 class CreateGroups < ActiveRecord::Migration
   def self.up
     create_table :groups do |t|
-      t.string :name
+      t.string :name, :null => false
       t.string :website_url
       t.text :description
 
