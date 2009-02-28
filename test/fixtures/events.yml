@@ -1,17 +1,33 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  group_id: 1
-  location_id: 1
-  name: MyString
-  description: MyText
-  start_time: 2009-02-28 14:41:18
-  end_time: 2009-02-28 14:41:18
+  group: one
+  location: one
+  name: Weekly Tuesday Meeting
+  description: Come one and all for our weekly tuesday meeting!
+  start_time: 2009-03-10 19:00:00
+  end_time: 2009-03-10 22:00:00
 
 two:
-  group_id: 1
-  location_id: 1
-  name: MyString
-  description: MyText
-  start_time: 2009-02-28 14:41:18
-  end_time: 2009-02-28 14:41:18
+  group: one
+  location: one
+  name: Weekly Tuesday Meeting
+  description: Come one and all for our weekly tuesday meeting!
+  start_time: 2009-03-16 18:56:00
+  end_time: 2009-03-16 22:12:34
+
+three:
+  group: one
+  location: two
+  name: Come meet the Portland Weenies
+  description: Portland rubyers will be in town.  Come meet them.
+  start_time: 2009-06-05 08:00:00
+  end_time: 2009-06-08 17:00:00
+
+four:
+  group: two
+  location: two
+  name: Trip To Seattle!
+  description: Portland Ruby Weenies Head to Seattle
+  start_time: 2009-06-05 08:00:00
+  end_time: 2009-06-08 17:00:00
