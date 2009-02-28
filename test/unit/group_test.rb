@@ -1,12 +1,6 @@
 require 'test_helper'
 
 class GroupTest < ActiveSupport::TestCase
-  def test_validation_error klass, member, error_string
-    bad_object = klass.send :new
-    bad_object.save
-    assert(bad_object.errors.on(member).to_a.include?(error_string))
-  end
-
   test "validates name" do
     test_validation_error Group, 'name', "can't be blank"
   end

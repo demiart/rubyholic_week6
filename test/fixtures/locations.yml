@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  address: MyString
+  description: MyText
+  latitude: 1.5
+  longitute: 1.5
+
+two:
+  name: MyString
+  address: MyString
+  description: MyText
+  latitude: 1.5
+  longitute: 1.5

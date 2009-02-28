@@ -35,4 +35,14 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def test_validation_error klass, member, error_string
+    bad_object = klass.send :new
+    bad_object.save
+    assert(bad_object.errors.on(member).to_a.include?(error_string))
+  end
+
+
+
 end
+
+
