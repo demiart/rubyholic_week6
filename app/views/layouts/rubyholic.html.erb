@@ -14,7 +14,7 @@
   <div class='logo'><%= image_tag "rubyholic_4in.jpg", :alt => 'rubyholic logo'\
  %> </div>
   <div class='content'>
-    <p style="color: green"><%= flash[:notice] %></p>
+    <p class='flash' style="color: green"><%= flash[:notice] %></p>
     <%= yield  %>                                                        
   </div>
 </div>

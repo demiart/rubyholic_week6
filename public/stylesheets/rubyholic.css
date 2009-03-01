@@ -5,17 +5,43 @@ body {
   height: 100%;
   width: 100%;
   background-color: #300;
+  color: #300;
+  font-family: Helvetica, sans-serif;
+}
+
+select {
+  background-color: #FEE;
+}
+
+input, textarea {
+  padding: 2px;
+  margin-top: 0;
+  background-color: #FEE;
+  border: 1px solid #666;
+}
+
+input[type="text"] { 
+  width: 50%;
+}
+
+textarea {
+  width: 99%; 
+}
+
+div h1 {
+  font-size: 14pt;
+  color: #300;
 }
 
 div.side {
-  padding: 10px;
-  position: absolute;
+  position: absolute; 
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 100%;
   border-left: 2px solid black;
   border-right: 2px solid black; 
-  top: 0;
   left: 15%;
   width: 70%;
-  height: 100%;
   background-color: white;
 }
 
@@ -29,6 +55,41 @@ div.logo {
 
 div.content {
   position: absolute;
-  top: 120px;
-
+  top: 125px;
+  left: 0px;
+  right: 0px;
+  padding: 10px;
+  padding-bottom: 25px;
+  margin-bottom: 0;
+  background-color: white;
 }
+
+div.errors {
+  positioning: absolute;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+div.errorExplanation {
+  positioning: absolute;
+  border: solid red 1px;
+  left: 0;
+  font-size: small;
+  padding: 10px;
+  padding-top: 0px;
+} 
+
+div.errorExplanation h2 {
+  text-decoration: underline;
+  text-align: center;
+}
+
+div.errorExplanation p {
+  margin-left: 10px;
+}
+
+div.errorExplanation ul li {
+  color: red;
+}
+
