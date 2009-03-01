@@ -1,15 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  address: MyString
-  description: MyText
-  latitude: 1.5
-  longitute: 1.5
+  name: Vivache Coffee
+  address: 532 Broadway E, Seattle, WA 98102
+  description: In the new Brix building
+  latitude: 47.635957
+  longitute: -122.320919
+
 
 two:
-  name: MyString
-  address: MyString
-  description: MyText
-  latitude: 1.5
-  longitute: 1.5
+  name: Top Pot Doughnuts
+  address: 609 Summit Ave E, Seattle, WA 98102
+  description: You can't miss it.
+  latitude: 47.630723
+  longitute: -122.330875

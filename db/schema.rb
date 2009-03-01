@@ -9,10 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090228090256) do
+ActiveRecord::Schema.define(:version => 20090228224118) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "group_id",    :null => false
+    t.integer  "location_id", :null => false
+    t.string   "name",        :null => false
+    t.text     "description"
+    t.datetime "start_time",  :null => false
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", :force => true do |t|
-    t.string   "name"
+    t.string   "name",        :null => false
     t.string   "website_url"
     t.text     "description"
     t.datetime "created_at"
@@ -20,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20090228090256) do
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
+    t.string   "name",        :null => false
+    t.string   "address",     :null => false
     t.text     "description"
     t.float    "latitude"
     t.float    "longitute"
