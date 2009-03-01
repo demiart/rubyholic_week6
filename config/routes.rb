@@ -46,5 +46,10 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+
+  # index of site
   map.root :controller => "groups", :action => 'index'
+  map.index 'index', :controller => "groups", :action => 'index'
+  map.index 'index.html', :controller => "groups", :action => 'index'
+  map.index 'index.htm', :controller => "groups", :action => 'index'
 end

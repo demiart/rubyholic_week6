@@ -7,8 +7,13 @@ class EventsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:events)
   end
 
-  test "should get new" do
+  test "getting new without a group redirects to groups index" do
     get :new
+    assert_redirected_to groups_path
+  end
+
+  test "getting new with a group id results in success" do
+    get :new, :group => groups(:one)
     assert_response :success
   end
 
@@ -20,7 +25,7 @@ class EventsControllerTest < ActionController::TestCase
         :start_time => "2009-03-10 19:00:00" }
     end
 
-    assert_redirected_to event_path(assigns(:event))
+    assert_redirected_to group_path(assigns(:event).group)
   end
 
   test "should show event" do
@@ -39,10 +44,11 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should destroy event" do
+    group = events(:one).group
     assert_difference('Event.count', -1) do
       delete :destroy, :id => events(:one).id
     end
 
-    assert_redirected_to events_path
+    assert_redirected_to group
   end
 end
