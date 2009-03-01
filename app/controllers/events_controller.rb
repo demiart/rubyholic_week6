@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  layout 'rubyholic'
   # GET /events
   # GET /events.xml
   def index

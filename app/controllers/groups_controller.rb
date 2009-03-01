@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  layout 'rubyholic'
+
   # GET /groups
   # GET /groups.xml
   def index
