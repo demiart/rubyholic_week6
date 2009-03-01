@@ -7,20 +7,21 @@ class EventsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:events)
   end
 
-  test "should get new" do
+  test "cant get new without group" do
     get :new
-    assert_response :success
+    assert_redirected_to :controller => 'groups', :action => 'index'
+    assert_match /must be created attached to a group/i, flash[:notice]
   end
 
-  test "should create event" do
+  test "create event redirects on success" do
     assert_difference('Event.count') do
       post :create, :event => { :group_id => groups(:one).id,
         :location_id => locations(:one).id,
         :name => "event name",
         :start_time => "2009-03-10 19:00:00" }
     end
-
-    assert_redirected_to event_path(assigns(:event))
+    gid = groups(:one).id
+    assert_redirected_to :controller => 'groups', :action => gid 
   end
 
   test "should show event" do
