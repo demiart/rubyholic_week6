@@ -9,13 +9,10 @@
 </head>
 <body>
 
-<p style="color: green"><%= flash[:notice] %></p>
-<div id='container1'>
-  <div class='side'>&nbsp;</div>
-  <div id='content'>
-    <%= yield  %>                                                               
-  </div>
-  <div class='side'>&nbsp;</div>
+<div class='side'>
+  <p style="color: green"><%= flash[:notice] %></p>
+  <%= yield  %>                                                                
 </div>
+
 </body>
 </html>
