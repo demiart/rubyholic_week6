@@ -9,19 +9,46 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-select {
+a:visited, a:link {
+  text-decoration: none;
+  color: #855;
+  background-color: #FDD;
+  padding: 2px;
+  border-top: 2px solid #ECC;
+  border-left: 2px solid #ECC;
+  border-right: 2px solid #B99;
+  border-bottom: 2px solid #B99;
+}
+
+a:active {
+  color: #522;
+}
+
+input, textarea, select {
   background-color: #FEE;
+  border: 1px solid #ECC;
 }
 
 input, textarea {
   padding: 2px;
   margin-top: 0;
-  background-color: #FEE;
-  border: 1px solid #666;
+}
+
+textarea, select, input[type="text"] {
+  border-top: 1px solid #B99;
+  border-left: 1px solid #B99;
 }
 
 input[type="text"] { 
   width: 50%;
+}
+
+input[type="submit"] {
+  border-top: 2px solid #ECC;
+  border-left: 2px solid #ECC;
+  border-right: 2px solid #B99;
+  border-bottom: 2px solid #B99;
+  width: 120px;
 }
 
 textarea {
