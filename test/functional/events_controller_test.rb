@@ -39,11 +39,13 @@ class EventsControllerTest < ActionController::TestCase
     assert_redirected_to event_path(assigns(:event))
   end
 
-  test "should destroy event" do
+  test "should destroy event and redirect to event group page" do
+    eid = events(:one).id
+    gid = events(:one).group.id
     assert_difference('Event.count', -1) do
-      delete :destroy, :id => events(:one).id
+      delete :destroy, :id => eid
     end
 
-    assert_redirected_to events_path
+    assert_redirected_to :controller => 'groups', :action => gid
   end
 end
