@@ -5,6 +5,13 @@ class GroupTest < ActiveSupport::TestCase
     test_validation_error Group, 'name', "can't be blank"
   end
 
+  test "that group names are unique" do
+    group = Group.new(groups(:one).attributes)
+    error_string = "must be completely unique in our system."
+    group.save
+    assert(group.errors.on(:name).to_a.include?(error_string))
+  end
+
 
   def assert_url is_valid, group, url
     group.website_url = url
