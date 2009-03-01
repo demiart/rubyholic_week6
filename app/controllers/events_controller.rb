@@ -27,6 +27,24 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
 
+    begin
+      @group = Group.find(params[:group])
+
+      # you can only create an event for a location
+      # this is already attached to this group
+      @locations_list = @group.locations.uniq.map { |location|
+        [ location.name, location.id ]
+      }
+
+      p @group
+    rescue
+      # don't want to making and event unless a group
+      # is given...
+      flash[:notice] = 'Events must be created attached to a group'
+      redirect_to :controller => 'groups', :action => 'index'
+      return
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -46,9 +64,16 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
-        format.html { redirect_to(@event) }
-        format.xml  { render :xml => @event, :status => :created, :location => @event }
+        format.html { redirect_to(:controller => 'groups', :action => 'show',
+                                  :id => @event.group_id) }
+
+       format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
+        @group = @event.group
+        @locations_list = @group.locations.uniq.map { |location|
+          [ location.name, location.id ]
+        }
+
         format.html { render :action => "new" }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end

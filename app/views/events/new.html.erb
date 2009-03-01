@@ -3,13 +3,11 @@
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :group_id %><br />
-    <%= f.text_field :group_id %>
-  </p>
+  <%= f.hidden_field :group_id, :value => @group.id %>
+
   <p>
     <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
+    <%= f.select(:location_id, @locations_list ) %>
   </p>
   <p>
     <%= f.label :name %><br />
