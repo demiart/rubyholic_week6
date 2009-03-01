@@ -14,7 +14,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   test "should create group" do
     assert_difference('Group.count') do
-      post :create, :group => { :name => "someting" }
+      post :create, :group => { :name => "something" }
     end
 
     assert_redirected_to group_path(assigns(:group))
