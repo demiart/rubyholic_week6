@@ -1,5 +1,19 @@
 class EventsController < ApplicationController
   layout 'rubyholic'
+
+protected
+
+  def create_locations_list group_id
+    @group = Group.find(group_id, :include => :locations)
+
+    # you can only create an event for a location
+    # this is already attached to this group
+    @locations_list = @group.locations.uniq.map { |location|
+      [ location.name, location.id ]
+    }
+  end
+public
+
   # GET /events
   # GET /events.xml
   def index
@@ -28,15 +42,7 @@ class EventsController < ApplicationController
     @event = Event.new
 
     begin
-      @group = Group.find(params[:group])
-
-      # you can only create an event for a location
-      # this is already attached to this group
-      @locations_list = @group.locations.uniq.map { |location|
-        [ location.name, location.id ]
-      }
-
-      p @group
+      create_locations_list params[:group]
     rescue
       # don't want to making and event unless a group
       # is given...
@@ -54,6 +60,13 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    begin
+      create_locations_list(@event.group_id)
+    rescue
+      flash[:notice] = 'Hmm, the event you are editing seems to have erros in it. Sorry.'
+      redirect_to :controller => 'groups', :action => 'index'
+    end
+
   end
 
   # POST /events
@@ -101,10 +114,11 @@ class EventsController < ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = Event.find(params[:id])
+    group = @event.group
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to(events_url) }
+      format.html { redirect_to group }
       format.xml  { head :ok }
     end
   end
