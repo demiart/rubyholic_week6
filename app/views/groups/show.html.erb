@@ -4,8 +4,7 @@
 </p>
 
 <p>
-  <b>Website url:</b>
-  <%=h @group.website_url %>
+<b><%= link_to "Group Website",@group.website_url %></b>
 </p>
 
 <p>
@@ -25,5 +24,10 @@
 <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<%= link_to 'New Event', :controller => "events", :action => "new" %>
+
+<hr>
+
+<%= link_to "Edit this group: #{@group.name}", edit_group_path(@group) %> |
+<%= link_to 'See all groups', groups_path %>
+
