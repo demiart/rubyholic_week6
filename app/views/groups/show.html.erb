@@ -14,5 +14,16 @@
 </p>
 
 
+<h3> Upcoming Events </h3>
+<ul>
+<% @group.events.each do |event|%>
+  <li>
+    <%= link_to event.name, event %>
+    <%=h event.start_time %> at
+    <%= link_to event.location.name, event.location %>
+  </li>
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
