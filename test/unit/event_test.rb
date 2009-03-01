@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+   test "validates name must exist" do
+    test_validation_error Event, 'name', "can't be blank"
   end
+
+  test "validates startime must exist" do
+    test_validation_error Event, 'start_time', "can't be blank"
+  end
+
 end

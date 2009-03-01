@@ -14,7 +14,10 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should create event" do
     assert_difference('Event.count') do
-      post :create, :event => { }
+      post :create, :event => { :group_id => groups(:one).id,
+        :location_id => locations(:one).id,
+        :name => "event name",
+        :start_time => "2009-03-10 19:00:00" }
     end
 
     assert_redirected_to event_path(assigns(:event))
