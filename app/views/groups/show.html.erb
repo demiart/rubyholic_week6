@@ -18,7 +18,7 @@
 <% @group.events.each do |event|%>
   <li>
     <%= link_to event.name, event %>
-    <%=h event.start_time %> at
+    <%=h get_nice_time(event.start_time) %> at
     <%= link_to event.location.name, event.location %>
   </li>
 <% end %>
