@@ -9,17 +9,19 @@
     <th>Longitute</th>
   </tr>
 
+<% row = 0 %>
 <% for location in @locations %>
-  <tr>
-    <td><%=h location.name %></td>
+  <tr <%= "class='row#{row}'" %> >
+    <td class='name'><%=h location.name %></td>
     <td><%=h location.address %></td>
     <td><%=h location.description %></td>
     <td><%=h location.latitude %></td>
     <td><%=h location.longitute %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='button'><%= link_to 'Show', location %></td>
+    <td class='button'><%= link_to 'Edit', edit_location_path(location) %></td>
+    <td class='button'><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+<% row = row == 0 ? 1 : 0 %>
 <% end %>
 </table>
 

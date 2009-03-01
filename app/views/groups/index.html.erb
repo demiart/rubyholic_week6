@@ -7,15 +7,22 @@
     <th>Description</th>
   </tr>
 
+<!-- alternating row colors -->
+<% row = 0 %>
 <% for group in @groups %>
-  <tr>
-    <td><%=h group.name %></td>
-    <td><%=h group.website_url %></td>
+  <tr <%= "class='row#{row}'" %> >
+    <td class='name'><%=h group.name %></td>
+    <% if !group.website_url then %>
+      <td>&nbsp;</td>
+    <% else %>
+      <td class='clearlink'><%= link_to "#{group.website_url}", group.website_url %></td>
+    <% end %>
     <td><%=h group.description %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='button'><%= link_to 'Show', group %></td>
+    <td class='button'><%= link_to 'Edit', edit_group_path(group) %></td>
+    <td class='button'><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+<% row = row == 1 ? 0 : 1 %> 
 <% end %>
 </table>
 

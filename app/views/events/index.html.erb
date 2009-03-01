@@ -10,18 +10,20 @@
     <th>End time</th>
   </tr>
 
+<% row = 0 %>
 <% for event in @events %>
-  <tr>
+  <tr <%= "class='row#{row}'" %> >
     <td><%=h event.group_id %></td>
     <td><%=h event.location_id %></td>
-    <td><%=h event.name %></td>
+    <td class='name'><%=h event.name %></td>
     <td><%=h event.description %></td>
     <td><%=h get_nice_time(event.start_time) %></td>
     <td><%=h get_nice_time(event.end_time) %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='button'><%= link_to 'Show', event %></td>
+    <td class='button'><%= link_to 'Edit', edit_event_path(event) %></td>
+    <td class='button'><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+<% row = row == 1? 0 : 1 %>
 <% end %>
 </table>
 
