@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20090228224118) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "name"
+    t.string   "name",        :null => false
     t.string   "website_url"
     t.text     "description"
     t.datetime "created_at"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20090228224118) do
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
+    t.string   "name",        :null => false
+    t.string   "address",     :null => false
     t.text     "description"
     t.float    "latitude"
     t.float    "longitute"
