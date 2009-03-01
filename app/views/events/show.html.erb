@@ -28,6 +28,6 @@
   <%=h get_nice_time(@event.end_time) %>
 </p>
 
-
 <%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to "Back to #{@event.group.name}", :controller => 'groups', :id => @event.group_id %>
+

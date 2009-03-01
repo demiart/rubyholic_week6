@@ -5,11 +5,12 @@
 
   <p>
     <%= f.label :group_id %><br />
-    <%= f.text_field :group_id %>
+    <%= @event.group.name %>
+    <%= f.hidden_field :group_id, :value => @event.group.id %>
   </p>
   <p>
     <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
+    <%= f.select(:location_id, @locations_list ) %>
   </p>
   <p>
     <%= f.label :name %><br />
@@ -33,4 +34,12 @@
 <% end %>
 
 <%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+
+<%= link_to "Back to #{@event.group.name}", :controller => 'groups',
+    :id => @event.group_id %>
+
+<%= link_to 'Remove this event', @event,
+    :confirm => 'Whoah there, are you sure?',
+    :method => :delete %>
+
+
