@@ -1,0 +1,72 @@
+<%
+   @new_string = "Create a new location."
+   @list_string = "Find a location this group has used before"
+   @all_string = "Use any location in our system."
+%>
+
+<%= select_tag ("location_choice",
+    "<option value = '0' >How shall we find our location?...</option>
+     <option value = '1' >#{@new_string}</option>
+     <option value = '2' >#{@list_string}</option>
+     <option value = '3' >#{@all_string} </option>" ) %>
+
+<%= javascript_tag "$('location_choice').setValue(0)" %>
+
+<%= observe_field 'location_choice', :function =>
+"if($('location_choice').value == '1' ) {
+  $('new_loc').appear(); }
+else {$('new_loc').hide(); }
+
+if($('location_choice').value == '2' ) {
+  $('list_loc').appear()}
+else {$('list_loc').hide();}
+
+if($('location_choice').value == '3' ) {
+  $('all_loc').appear()}
+else {$('all_loc').hide();} 
+" %>
+
+<div id='list_loc' style="display: none;">
+<% form_for(:location, :url => { :controller => :events, :action => :new, :group => @group }) do |f| %>
+    <%= f.label "Location" %><br />
+    <%= f.select(:id, @group_locations_list ) %>
+    <%= f.submit "Choose" %>
+</div><% end %>
+
+<div id='all_loc' style="display: none;">
+<% form_for(:location, :url => { :controller => :events, :action => :new, :group => @group }) do |f| %>
+    <%= f.label "Location" %><br />
+    <%= f.select(:id, @all_locations ) %>
+    <%= f.submit "Choose" %>
+<% end %>
+</div> 
+
+
+<div id='new_loc' style="display: none;">
+<h1>New location</h1>
+  <% form_for(@location) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+  <% end %>
+
+</div> 
+
+
+
+

@@ -1,6 +1,24 @@
 class LocationsController < ApplicationController
   layout 'rubyholic'
 
+
+protected
+# this isn't DRY as this function now in locations
+# and events.  My hope is to get rid of the events
+# one, but i need to write this first to see through
+# the problem.
+  def create_group_locations_list group_id
+    @group = Group.find(group_id, :include => :locations)
+
+    # you can only create an event for a location
+    # this is already attached to this group
+    @group_locations_list = @group.locations.uniq.map { |location|
+      [ location.name, location.id ]
+    }
+  end
+public
+
+
   # GET /locations
   # GET /locations.xml
   def index
@@ -11,6 +29,7 @@ class LocationsController < ApplicationController
       format.xml  { render :xml => @locations }
     end
   end
+
 
   # GET /locations/1
   # GET /locations/1.xml
@@ -84,4 +103,27 @@ class LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+
+
+  def choose
+
+   @location = Location.new
+    begin
+      create_group_locations_list params[:group]
+    rescue
+      #oops, someone fed us a bad group id
+      flash[:notice] = "We're so sorry! We don't recognize the group you are using."
+      redirect_to :controller => 'groups', :action => 'index'
+      return
+    end
+
+    @all_locations = Location.find(:all)
+
+    respond_to do |format|
+      format.html # choose.html.erb
+      format.xml  { render :xml => @all_locations }
+    end
+  end
+
 end

@@ -39,17 +39,25 @@ public
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
+      unless params[:group]
+        # don't want to making and event unless a group
+        # is given...
+        flash[:notice] = 'Events must be created attached to a group'
+        redirect_to :controller => 'groups', :action => 'index'
+        return
+      end
 
-    begin
-      create_locations_list params[:group]
-    rescue
-      # don't want to making and event unless a group
-      # is given...
-      flash[:notice] = 'Events must be created attached to a group'
-      redirect_to :controller => 'groups', :action => 'index'
-      return
-    end
+      unless params[:location]
+        flash[:notice] = 'Please pick a location for your event.'
+        redirect_to :controller => 'locations', :action => 'choose',
+        :group => params[:group]
+        return
+      end
+
+    @event = Event.new
+    @event.location = params[:location]
+    @event.group = params[:group]
+#      create_locations_list params[:group]
 
     respond_to do |format|
       format.html # new.html.erb
