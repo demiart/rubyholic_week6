@@ -62,11 +62,13 @@ public
   # POST /locations.xml
   def create
     @location = Location.new(params[:location])
+    @group = params[:group]
 
     respond_to do |format|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
-        format.html { redirect_to(@location) }
+        format.html { redirect_to(:controller => :events, :action => :new,
+                                  :group => @group, :location => @location ) }
         format.xml  { render :xml => @location, :status => :created, :location => @location }
       else
         format.html { render :action => "new" }

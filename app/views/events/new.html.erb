@@ -1,14 +1,13 @@
-<h1>New event</h1>
+<h1>New event for <%= @group.name %></h1>
 
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
 
   <%= f.hidden_field :group_id, :value => @group.id %>
+  <%= f.hidden_field :location_id, :value => @location.id %>
 
-  <p>
-    <%= f.label :location_id %><br />
-    <%= f.select(:location_id, @locations_list ) %>
-  </p>
+  At <%= @location.name %>
+
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

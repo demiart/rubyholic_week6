@@ -55,9 +55,9 @@ public
       end
 
     @event = Event.new
-    @event.location = params[:location]
-    @event.group = params[:group]
-#      create_locations_list params[:group]
+    @group = Group.find(params[:group])
+    @location = Location.find(params[:location])
+
 
     respond_to do |format|
       format.html # new.html.erb

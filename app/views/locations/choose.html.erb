@@ -34,17 +34,19 @@ else {$('all_loc').hide();}
 </div><% end %>
 
 <div id='all_loc' style="display: none;">
-<% form_for(:location, :url => { :controller => :events, :action => :new, :group => @group }) do |f| %>
+<% form_for(:location, :url => { :controller => :events,
+:action => :new,
+:group => @group }) do |f| %>
     <%= f.label "Location" %><br />
     <%= f.select(:id, @all_locations ) %>
     <%= f.submit "Choose" %>
 <% end %>
-</div> 
+</div>
 
 
 <div id='new_loc' style="display: none;">
 <h1>New location</h1>
-  <% form_for(@location) do |f| %>
+  <% form_for(@location, :url => { :action => 'create', :group => @group }) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -61,12 +63,8 @@ else {$('all_loc').hide();}
   </p>
 
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Create", :group => @goup %>
   </p>
   <% end %>
 
-</div> 
-
-
-
-
+</div>
