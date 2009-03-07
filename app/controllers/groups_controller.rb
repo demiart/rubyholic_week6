@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.xml
   def show
     @group = Group.find(params[:id])
-
+    @event = Event.new
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @group }

@@ -39,7 +39,9 @@ public
   # GET /events/new
   # GET /events/new.xml
   def new
-      unless params[:group]
+    p params
+    @event = Event.new(params[:event])
+      unless @event.group
         # don't want to making and event unless a group
         # is given...
         flash[:notice] = 'Events must be created attached to a group'
@@ -47,18 +49,14 @@ public
         return
       end
 
-      unless params[:location]
+      unless @event.location
         flash[:notice] = 'Please pick a location for your event.'
         redirect_to :controller => 'locations', :action => 'choose',
-        :group => params[:group]
+        :group => @event.group
         return
       end
 
-    @event = Event.new
-    @group = Group.find(params[:group])
-    @location = Location.find(params[:location])
-
-
+    p @event
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -80,7 +78,22 @@ public
   # POST /events
   # POST /events.xml
   def create
+    p @event
     @event = Event.new(params[:event])
+      unless @event.group
+        # don't want to making and event unless a group
+        # is given...
+        flash[:notice] = 'Events must be created attached to a group'
+        redirect_to :controller => 'groups', :action => 'index'
+        return
+      end
+
+      unless @event.location
+        flash[:notice] = 'Please pick a location for your event.'
+        redirect_to :controller => 'locations', :action => 'choose',
+        :group => @event.group
+        return
+      end
 
     respond_to do |format|
       if @event.save

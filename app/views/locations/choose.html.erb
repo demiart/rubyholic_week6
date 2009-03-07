@@ -27,18 +27,20 @@ else {$('all_loc').hide();}
 " %>
 
 <div id='list_loc' style="display: none;">
-<% form_for(:location, :url => { :controller => :events, :action => :new, :group => @group }) do |f| %>
+<% form_for(@event, :url => { :controller => :events,
+   :action => :new }, :method => :get) do |f| %>
+  <%= f.hidden_field :group_id, :value => @group.id %>
     <%= f.label "Location" %><br />
-    <%= f.select(:id, @group_locations_list ) %>
+    <%= f.select(:location_id, @group_locations_list ) %>
     <%= f.submit "Choose" %>
 </div><% end %>
 
 <div id='all_loc' style="display: none;">
-<% form_for(:location, :url => { :controller => :events,
-:action => :new,
-:group => @group }) do |f| %>
+<% form_for(@event, :url => { :controller => :events,
+   :action => :new }, :method => :get) do |f| %>
+  <%= f.hidden_field :group_id, :value => @group.id %>
     <%= f.label "Location" %><br />
-    <%= f.select(:id, @all_locations ) %>
+    <%= f.select(:location_id, @all_locations ) %>
     <%= f.submit "Choose" %>
 <% end %>
 </div>
@@ -63,7 +65,7 @@ else {$('all_loc').hide();}
   </p>
 
   <p>
-    <%= f.submit "Create", :group => @goup %>
+    <%= f.submit "Create" %>
   </p>
   <% end %>
 

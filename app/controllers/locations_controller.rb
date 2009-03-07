@@ -62,13 +62,13 @@ public
   # POST /locations.xml
   def create
     @location = Location.new(params[:location])
-    @group = params[:group]
 
     respond_to do |format|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
         format.html { redirect_to(:controller => :events, :action => :new,
-                                  :group => @group, :location => @location ) }
+                                  :event => { :group_id => params[:group],
+                                              :location_id => @location.id })}
         format.xml  { render :xml => @location, :status => :created, :location => @location }
       else
         format.html { render :action => "new" }
@@ -120,8 +120,10 @@ public
       return
     end
 
-    @all_locations = Location.find(:all)
-
+    @all_locations = Location.find(:all).map { |location|
+      [ location.name, location.id ]
+    }
+    @event = Event.new
     respond_to do |format|
       format.html # choose.html.erb
       format.xml  { render :xml => @all_locations }

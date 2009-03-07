@@ -24,8 +24,11 @@
 <% end %>
 </ul>
 
-<%= link_to 'New Event', :controller => "events", :action => "new", :group => @group %>
-
+<% form_for(@event) do |f| %>
+  <%= f.hidden_field :group_id, :value => @group.id %>
+    <%= f.submit "New Event" %>
+  </p>
+<% end %>
 
 <hr>
 
