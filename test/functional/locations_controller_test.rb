@@ -17,7 +17,7 @@ class LocationsControllerTest < ActionController::TestCase
       post :create, :location => { :address => "1st street", :name => "new loc" }
     end
 
-    assert_redirected_to location_path(assigns(:location))
+    assert_redirected_to :controller => :events, :action => :new
   end
 
   test "should show location" do

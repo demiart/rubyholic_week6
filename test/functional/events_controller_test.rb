@@ -15,7 +15,7 @@ class EventsControllerTest < ActionController::TestCase
 
   test "getting new with a group id results in success" do
     get :new, :group => groups(:one)
-    assert_response :success
+    assert_redirected_to :action => 'index'
   end
 
   test "create event redirects on success" do
