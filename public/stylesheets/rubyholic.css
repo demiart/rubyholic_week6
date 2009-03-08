@@ -24,6 +24,44 @@ a:active {
   color: #522;
 }
 
+tr {
+  font-size: small;
+}
+
+tr.row0 {
+  background-color: #FDD;
+}
+
+tr.row1 {
+  background-color: #DBB;
+}
+
+th {
+  border-bottom: 1px solid #999;
+}
+
+td {
+  padding: 3px;
+}
+
+td.name {
+  font-weight: bold;
+}
+
+td.button {
+  background-color: white;
+}
+
+tr.row0 td.clearlink a {
+  background-color: #FDD;
+  border: 0;
+}
+
+tr.row1 td.clearlink a {
+  background-color: #DBB;
+  border: 0;
+}
+
 li {
   margin-top: .75em;
 }
