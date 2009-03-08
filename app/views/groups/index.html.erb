@@ -11,16 +11,14 @@
 <% row = 0 %>
 <% for group in @groups %>
   <tr <%= "class='row#{row}'" %> >
-    <td class='name'><%=h group.name %></td>
+    <td class='name, clearlink'><%= link_to group.name, group %></td>
+<!-- <%=h group.name %></td> -->
     <% if !group.website_url then %>
       <td>&nbsp;</td>
     <% else %>
       <td class='clearlink'><%= link_to "#{group.website_url}", group.website_url %></td>
     <% end %>
     <td><%=h group.description %></td>
-    <td class='button'><%= link_to 'Show', group %></td>
-    <td class='button'><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td class='button'><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% row = row == 1 ? 0 : 1 %> 
 <% end %>

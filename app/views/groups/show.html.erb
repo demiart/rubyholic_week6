@@ -34,4 +34,6 @@
 
 <%= link_to "Edit this group: #{@group.name}", edit_group_path(@group) %> |
 <%= link_to 'See all groups', groups_path %>
-
+<br/><br/><p>
+<%= link_to 'Destroy this group', @group, :confirm => 'Are you sure?  This will also destroy all related events.', :method => :delete %>
+</p>
