@@ -42,4 +42,14 @@ class LocationsControllerTest < ActionController::TestCase
 
     assert_redirected_to locations_path
   end
+
+  test "cant choose without a group" do
+    get :choose
+    assert_redirected_to groups_path
+  end
+
+  test "can choose with a group" do
+    get :choose, :group => groups(:one).id
+    assert_response :success
+  end
 end
