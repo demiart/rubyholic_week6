@@ -13,10 +13,17 @@ class EventsControllerTest < ActionController::TestCase
     assert_match /must be created attached to a group/i, flash[:notice]
   end
 
-  test "getting new with a group id results in success" do
-    get :new, :group => groups(:one)
-    assert_redirected_to :action => 'index'
+  test "getting new with a group id results in redirect to location/choose" do
+    get :new, :event => { :group_id => groups(:one).id }
+    assert_redirected_to :controller => 'locations', :action => 'choose'
   end
+
+  test "getting new with a group id and location id results in succes" do
+    get :new, :event => { :group_id => groups(:one).id,
+      :location_id => locations(:one).id }
+    assert_response :success
+  end
+
 
   test "create event redirects on success" do
     assert_difference('Event.count') do

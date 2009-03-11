@@ -39,7 +39,6 @@ public
   # GET /events/new
   # GET /events/new.xml
   def new
-    p params
     @event = Event.new(params[:event])
       unless @event.group
         # don't want to making and event unless a group
@@ -56,7 +55,6 @@ public
         return
       end
 
-    p @event
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -78,7 +76,6 @@ public
   # POST /events
   # POST /events.xml
   def create
-    p @event
     @event = Event.new(params[:event])
       unless @event.group
         # don't want to making and event unless a group

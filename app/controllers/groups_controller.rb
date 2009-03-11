@@ -4,7 +4,19 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.find(:all)
+    @groups = Group.find(:all, :order => 'name')
+    @locations = Location.find(:all).map{ |location|
+      [location.name, location.id] }
+    @location = Location.new
+
+    begin
+      @location_choice = Location.find(params[:location])
+      @groups.each{ |group|
+        @groups.delete(group) unless group.locations.include? @location_choice
+      }
+    rescue
+
+    end
 
     respond_to do |format|
       format.html # index.html.erb

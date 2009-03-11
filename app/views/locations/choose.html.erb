@@ -2,13 +2,23 @@
    @new_string = "Create a new location."
    @list_string = "Find a location this group has used before"
    @all_string = "Use any location in our system."
+   @list = [[@new_string, @list_string, @all_string]]
 %>
 
-<%= select_tag ("location_choice",
+<!---
+<div id='location_choice_no_js' >
+<% form_for(@event, :url => { :action => :new, :group => @group_id }) do |f| %>
+    <%= f.label "Location" %><br />
+    <%= f.select(:location_id, @list ) %>
+    <%= f.submit "Choose" %>
+</div><% end %>
+-->
+
+<%= select_tag("location_choice",
     "<option value = '0' >How shall we find our location?...</option>
      <option value = '1' >#{@new_string}</option>
      <option value = '2' >#{@list_string}</option>
-     <option value = '3' >#{@all_string} </option>" ) %>
+     <option value = '3' >#{@all_string} </option>")%>
 
 <%= javascript_tag "$('location_choice').setValue(0)" %>
 
