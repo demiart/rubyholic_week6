@@ -6,9 +6,16 @@ class Group < ActiveRecord::Base
 
   validates_format_of :website_url, :with => /^((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?)?$/ix
 
-
-
   has_many :events
   has_many :locations, :through => :events
+
+
+
+#define_index do
+# indexes name
+# indexes events.descriptions, :as => :event_descriptions
+#end
+
+
 
 end
