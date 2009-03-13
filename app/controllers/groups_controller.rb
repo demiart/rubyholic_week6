@@ -4,7 +4,9 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.find(:all, :order => 'name')
+
+    @groups = Group.paginate :page => params[:page], :per_page => 2
+#    @groups = Group.find(:all, :order => 'name')
     @locations = Location.find(:all).map{ |location|
       [location.name, location.id] }
     @location = Location.new

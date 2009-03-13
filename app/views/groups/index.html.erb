@@ -9,6 +9,7 @@
 
 <!-- alternating row colors -->
 <% row = 0 %>
+
 <% for group in @groups %>
   <tr <%= "class='row#{row}'" %> >
     <td class='name, clearlink'><%= link_to group.name, group %></td>
@@ -23,10 +24,20 @@
 <% row = row == 1 ? 0 : 1 %> 
 <% end %>
 </table>
-
 <br />
 
+
 <%= link_to 'New group', new_group_path %>
+
+<br />
+<br />
+<br />
+
+
+<%= will_paginate @groups %>
+
+
+
 <div id='all_locations'>
 <br />
 
@@ -43,3 +54,6 @@
 <%= link_to "Show all groups", :action => 'index' %>
 
 <% end #if @location_choice %>
+
+
+
