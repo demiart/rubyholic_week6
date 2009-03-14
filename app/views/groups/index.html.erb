@@ -42,7 +42,8 @@
 <br />
 
 <% form_tag( {:action => 'index'}, {:method => 'get'})  do %>
-<%= select_tag(:location, options_for_select(@locations)) %>
+<!--<% def_loc = params["location"] ? Location.find(params["location"]) : Location.first  %>-->
+<%= select_tag(:location, options_for_select(@locations, get_location_option_from_id(params["location"]) ) ) %>
 <%= submit_tag( 'Go', :name => nil ) %>
 <% end %>
 
