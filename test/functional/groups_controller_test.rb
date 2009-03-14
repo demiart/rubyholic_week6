@@ -1,10 +1,17 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
+
   test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:groups)
+  end
+
+  test "should persist location choice across calls in select dd" do
+    loc = locations(:two)
+    get :index, :params => { 'location' => loc.id }
+    assert_select "option", :selected => 'selected', :text => loc.name
   end
 
   test "should get new" do
