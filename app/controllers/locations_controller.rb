@@ -1,7 +1,6 @@
 class LocationsController < ApplicationController
   layout 'rubyholic'
 
-
 protected
 # this isn't DRY as this function now in locations
 # and events.  My hope is to get rid of the events
@@ -56,6 +55,7 @@ public
   # GET /locations/1/edit
   def edit
     @location = Location.find(params[:id])
+
   end
 
   # POST /locations

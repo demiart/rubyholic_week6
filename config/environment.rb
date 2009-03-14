@@ -27,6 +27,10 @@ Rails::Initializer.run do |config|
   :lib    => 'will_paginate',
   :source => "http://gems.github.com/"
 
+  config.gem "andre-geokit",
+  :lib    => 'geokit',
+  :source => 'http://gems.github.com'
+
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"

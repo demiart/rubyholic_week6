@@ -20,6 +20,14 @@ class LocationsControllerTest < ActionController::TestCase
     assert_redirected_to :controller => :events, :action => :new
   end
 
+  test "should auto geocode lat long" do
+    post :create, :location => { :name => "demi home", :address => "13919 20th pl. w., Lynnwood, WA 98087"}
+    loc = Location.last
+    assert_equal 'demi home', loc.name
+    assert_equal 47.8716, loc.latitude
+    assert_equal -122.26, loc.longitute
+  end
+
   test "should show location" do
     get :show, :id => locations(:one).id
     assert_response :success

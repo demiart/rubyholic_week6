@@ -1,13 +1,21 @@
 require 'test_helper'
 
 class LocationTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
+
   test "validates name" do
-    test_validation_error Location, 'name', "can't be blank"
+    location = Location.new
+    location.address = locations(:one).address
+   
+    assert ! location.valid?
+    assert location.errors.on(:name)
   end
 
   test "validates address" do
-    test_validation_error Location, 'address', "can't be blank"
+    location = Location.new
+    location.name = "some new name"
+    
+    assert ! location.valid?
+    assert location.errors.on(:address)
   end
 
 end
