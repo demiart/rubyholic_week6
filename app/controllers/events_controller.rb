@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  layout 'rubyholic'
+  layout 'events_mappable'
 
 protected
 

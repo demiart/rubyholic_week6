@@ -1,11 +1,12 @@
 <p>
   <b>Group:</b>
-  <%=h @event.group_id %>
+  <%=h @event.group.name %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%=h @event.location_id %>
+  <%=h @event.location.name %>
+  <div id="map_canvas" style="width: 500px; height: 300px;"></div>
 </p>
 
 <p>

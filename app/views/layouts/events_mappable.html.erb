@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <!--<title>Groups: <%= controller.action_name %></title>-->
+  <title>Rubyholic</title>
+  <%= stylesheet_link_tag 'rubyholic' %>
+  <%= javascript_include_tag :defaults %>
+  <% if @event && @event.location then %>
+    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAARHEV9N9WV-TdcsJCSVmSjBTJQa0g3IQ9GZqIMmInSLzwtGDKaBQMNShIGGkX9-LDVt5akUwmNlEFtw&sensor=false" type="text/javascript"></script>
+  <% end %>
+</head>
+<body <% if @event && @event.location then %>onload="initialize()" onunload="GUnload()"<% end %>>
+<% if @event && @event.location then %>
+<script type="text/javascript">                                               
+  function initialize() {                                                      
+    var map = new GMap2(document.getElementById("map_canvas"));                
+    var ll = new GLatLng(<%= @event.location.latitude %>, <%= @event.location.longitute %>);
+    map.setCenter(ll, 15);
+    map.addOverlay(new GMarker(ll));
+  }                                                                            
+</script>
+<% end %>
+<div class='side'>
+  <div class='logo'><%= image_tag "rubyholic_4in.jpg", :alt => 'rubyholic logo'\
+ %> </div>
+  <div class='content'>
+    <p class='flash' style="color: green"><%= flash[:notice] %></p>
+    <%= yield  %>                                                        
+  </div>
+</div>
+
+
+</body>
+</html>
