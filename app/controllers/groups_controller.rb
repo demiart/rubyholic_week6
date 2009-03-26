@@ -5,20 +5,7 @@ class GroupsController < ApplicationController
   # GET /groups.xml
   def index
 
-    @groups = Group.paginate :page => params[:page], :per_page => 2
-#    @groups = Group.find(:all, :order => 'name')
-    @locations = Location.find(:all).map{ |location|
-      [location.name, location.id] }
-    @location = Location.new
-
-    begin
-      @location_choice = Location.find(params[:location])
-      @groups.each{ |group|
-        @groups.delete(group) unless group.locations.include? @location_choice
-      }
-    rescue
-
-    end
+    @groups = Group.paginate :page => params[:page], :per_page => 5
 
     respond_to do |format|
       format.html # index.html.erb

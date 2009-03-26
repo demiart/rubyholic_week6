@@ -35,26 +35,3 @@
 
 
 <%= will_paginate @groups %>
-
-
-
-<div id='all_locations'>
-<br />
-
-<% form_tag( {:action => 'index'}, {:method => 'get'})  do %>
-<!--<% def_loc = params["location"] ? Location.find(params["location"]) : Location.first  %>-->
-<%= select_tag(:location, options_for_select(@locations, get_location_option_from_id(params["location"]) ) ) %>
-<%= submit_tag( 'Go', :name => nil ) %>
-<% end %>
-
-</div>
-
-<br />
-<% if @location_choice%>
-
-<%= link_to "Show all groups", :action => 'index' %>
-
-<% end #if @location_choice %>
-
-
-
