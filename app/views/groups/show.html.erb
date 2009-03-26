@@ -19,14 +19,26 @@
 <hr>
 
 <h3> Upcoming Events </h3>
+
+<table>
+  <tr>
+    <th>Event Name</th>
+    <th>Start Time</th>
+    <th>Location</th>
+  </tr>
+
 <ul>
+<% row = 0 %>
 <% @events.each do |event|%>
-  <li>
-    <%= link_to event.name, event %>
-    <%=h get_nice_time(event.start_time) %> at
-    <%= link_to event.location.name, event.location %>
-  </li>
+  <tr <%= "class='row#{row}'" %> >
+    <td class='name, clearlink'><%= link_to event.name, event %></td>
+    <td><%=h get_nice_time(event.start_time) %> </td> 
+    <td class='clearlink'><%= link_to event.location.name, event.location %></td>
+  </tr>
+<% row = row == 1 ? 0 : 1 %>
 <% end %>
+</table>
+
 </ul>
 
 <%= will_paginate @events %>
