@@ -4,7 +4,11 @@
 </p>
 
 <p>
-<b><%= link_to "Group Website",@group.website_url %></b>
+<% if(@group.website_url != '') %>
+<b><%= link_to "Group Website: #{@group.website_url}",@group.website_url %></b>
+<% else %>
+<i>(edit group to add a group website)</i>
+<% end %>
 </p>
 
 <p>
