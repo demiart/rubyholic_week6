@@ -5,7 +5,8 @@ class GroupsController < ApplicationController
   # GET /groups.xml
   def index
 
-    @groups = Group.paginate :page => params[:page], :per_page => 5
+    @groups = Group.paginate :page => params[:page], :per_page => 5,
+    :order => 'name'
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +18,8 @@ class GroupsController < ApplicationController
   # GET /groups/1.xml
   def show
     @group = Group.find(params[:id])
+    @events = Event.paginate :page => params[:page], :per_page => 10,
+    :order => 'start_time'
     @event = Event.new
     respond_to do |format|
       format.html # show.html.erb

@@ -15,7 +15,7 @@ module ApplicationHelper
     ampm = ltime.hour >= 12 ? "PM" : "AM"
     hour = ltime.hour > 12 ? ltime.hour - 12 : ltime.hour
     hour = 12 if hour == 0
-    sprintf("%s, %d/%d/%d, %d:%02d %s", wday, ltime.mon + 1, ltime.day, ltime.year, hour, ltime.min, ampm)
+    sprintf("%s, %d/%d/%d, %d:%02d %s", wday, ltime.mon, ltime.day, ltime.year, hour, ltime.min, ampm)
   end
 
 end

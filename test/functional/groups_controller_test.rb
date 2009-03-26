@@ -8,12 +8,6 @@ class GroupsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:groups)
   end
 
-  test "should persist location choice across calls in select dd" do
-    loc = locations(:two)
-    get :index, :params => { 'location' => loc.id }
-    assert_select "option", :selected => 'selected', :text => loc.name
-  end
-
   test "should get new" do
     get :new
     assert_response :success
