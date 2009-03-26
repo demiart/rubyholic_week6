@@ -4,10 +4,12 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-
-    @groups = Group.paginate :page => params[:page], :per_page => 5,
-    :order => 'name'
-
+    if ! params[:search].empty? then
+      @groups = Group.search( params[:search], :page => (params[:page] || 1) )
+    else
+      @groups = Group.paginate :page => params[:page], :per_page => 5, :order => 'name'
+    end  
+  
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @groups }

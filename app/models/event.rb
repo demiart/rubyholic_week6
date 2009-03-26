@@ -4,4 +4,8 @@ class Event < ActiveRecord::Base
   belongs_to :group
   belongs_to :location
 
+  define_index do
+    indexes name, description
+  end
+
 end
