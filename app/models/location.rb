@@ -9,4 +9,7 @@ class Location < ActiveRecord::Base
   has_many :events
   has_many :groups, :through => :events
 
+  define_index do
+    indexes name, address, description
+  end
 end

@@ -11,10 +11,11 @@ class Group < ActiveRecord::Base
 
 
 
-#define_index do
-# indexes name
-# indexes events.descriptions, :as => :event_descriptions
-#end
+  define_index do
+    indexes name, description
+    indexes events.description, :as => :event_descriptions
+    indexes events.name, :as => :event_names
+  end
 
 
 

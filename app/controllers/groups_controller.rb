@@ -4,9 +4,12 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.paginate :page => params[:page], :per_page => 5,
-    :order => 'name'
 
+    if params[:search] then
+      @groups = Group.search( params[:search], :page => (params[:page] || 1) )
+    else
+      @groups = Group.paginate :page => params[:page], :per_page => 5, :order => 'name'
+    end
 
 
     respond_to do |format|
@@ -18,8 +21,8 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
-    @sort = params[:sort_events_by] || 'name'
-    @sort = 'name' unless %w(name start_time locationname ).include? @sort
+    @sort = params[:sort_events_by] || 'start_time'
+    @sort = 'start_time' unless %w(name start_time locationname ).include? @sort
 
     @group = Group.find(params[:id])
 
