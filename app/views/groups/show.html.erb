@@ -22,9 +22,18 @@
 
 <table>
   <tr>
-    <th>Event Name</th>
-    <th>Start Time</th>
-    <th>Location</th>
+    <th><%= link_to 'Event Name',{ :controller => 'groups', :action =>
+    'show', :id => @group, :sort_events_by => 'name'} %> </th>
+    <th><%= link_to 'Start Time',{ :controller => 'groups', :action =>
+    'show', :id => @group, :sort_events_by => 'start_time'} %> </th>
+    <th><%= link_to 'Location',{ :controller => 'groups', :action =>
+    'show', :id => @group, :sort_events_by => 'locationname'} %> </th>
+  </tr>
+
+  <tr>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
   </tr>
 
 <ul>

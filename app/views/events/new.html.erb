@@ -2,7 +2,7 @@
 
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
-
+  
   <%= f.hidden_field :group_id, :value => @event.group.id %>
   <%= f.hidden_field :location_id, :value => @event.location.id %>
 

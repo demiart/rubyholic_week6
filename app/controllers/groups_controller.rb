@@ -4,9 +4,10 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-
     @groups = Group.paginate :page => params[:page], :per_page => 5,
     :order => 'name'
+
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,9 +18,22 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.xml
   def show
+    @sort = params[:sort_events_by] || 'name'
+    @sort = 'name' unless %w(name start_time locationname ).include? @sort
+
     @group = Group.find(params[:id])
-    @events = Event.paginate :page => params[:page], :per_page => 10,
-    :order => 'start_time'
+
+
+    @events = Event.paginate(:all,
+                             :select => 'events.name, events.id, events.start_time,
+                             events.location_id, locations.name as locationname',
+                             :joins => [ :location],
+                             :conditions => ['group_id=?', params[:id]],
+                             :group => :name,
+                             :order => @sort,
+                             :page => params[:page],
+                             :per_page => 10)
+
     @event = Event.new
     respond_to do |format|
       format.html # show.html.erb
