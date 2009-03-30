@@ -6,7 +6,20 @@
 <p>
   <b>Location:</b>
   <%=h @event.location.address %>&nbsp;(<%=h @event.location.name %>)
-  <div id="map_canvas" style="width: 500px; height: 300px;"></div>
+  <div id="map_canvas" style="width: 600px; height: 400px;"></div>
+
+ <!--What to display if JavaScript is disabled in the user's
+ browser-->
+ <noscript>
+   <strong>JavaScript must be enabled in order for you to use maps.</strong>
+   <br />
+   However, it seems JavaScript is either disabled or not supported by your browser. <br />
+   To view Google Maps, enable JavaScript by changing your browser
+   options, and then
+   try again.
+   <br /><br />
+ </noscript>
+ 
 </p>
 
 <p>

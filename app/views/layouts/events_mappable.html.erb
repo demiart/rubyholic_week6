@@ -14,14 +14,84 @@
 </head>
 <body <% if @event && @event.location then %>onload="initialize()" onunload="GUnload()"<% end %>>
 <% if @event && @event.location then %>
-<script type="text/javascript">                                               
-  function initialize() {                                                      
-    var map = new GMap2(document.getElementById("map_canvas"));                
+<script type="text/javascript">  
+// this variable will collect the html which will eventually be placed in the GMapSidebar
+var GMapSidebar_html = "";
+
+// arrays to hold copies of the markers and html used by the GMapSidebar
+// because the function closure trick doesnt work there
+var gmarkers = [];
+var htmls = [];
+var i = 0;
+
+// arrays to hold variants of the info window html with get direction forms open
+var to_htmls = [];
+var from_htmls = [];
+                                             
+function createMarker(point,name,html) {
+    var marker = new GMarker(point);
+
+    // The info window version with the "to here" form open (The Directions Form part.)
+    to_htmls[i] = html + '<br>Directions: <b>To here</b> - <a href="javascript:fromhere(' + i + ')">From here</a>' +
+    '<br>Start address:<form action="http://maps.google.com/maps" method="get" target="_blank">' +
+    '<input type="text" size=40 maxlength=40 name="saddr" id="saddr" value="" /><br>' +
+    '<input value="Get Directions" TYPE="submit">' +
+    '<input type="hidden" name="daddr" value="' + point.lat() + ',' + point.lng() + '"/>';
+
+    // The info window version with the "to here" form open
+    from_htmls[i] = html + '<br>Directions: <a href="javascript:tohere(' + i + ')">To here</a> - <b>From here</b>' +
+    '<br>End address:<form action="http://maps.google.com/maps" method="get"" target="_blank">' +
+    '<input type="text" size=40 maxlength=40 name="daddr" id="daddr" value="" /><br>' +
+    '<input value="Get Directions" type="SUBMIT">' +
+    '<input type="hidden" name="saddr" value="' + point.lat() + ',' + point.lng() + '"/>';
+
+    // The inactive version of the direction info
+    html = html + '<br>Directions: <a href="javascript:tohere('+i+')">To here</a> - <a href="javascript:fromhere('+i+')">From here</a>';
+
+    GEvent.addListener(marker, "click", function() {
+    	marker.openInfoWindowHtml(html);
+    });
+    
+    // save the info we need to use later for the GMapSidebar
+    gmarkers[i] = marker;
+    htmls[i] = html;
+    // add a line to the GMapSidebar html
+    GMapSidebar_html += '<a href="javascript:myclick(' + i + ')">' + name + '</a><br>';
+    i++;
+    return marker;
+}
+
+      // This function picks up the click and opens the corresponding info window
+function myclick(i) {
+    gmarkers[i].openInfoWindowHtml(htmls[i]);
+}
+
+// functions that open the directions forms
+function tohere(i) {
+   gmarkers[i].openInfoWindowHtml(to_htmls[i]);
+}
+
+function fromhere(i) {
+   gmarkers[i].openInfoWindowHtml(from_htmls[i]);
+}
+
+
+  function initialize() {                                                     
+	var map = new GMap2(document.getElementById("map_canvas"));                
     var ll = new GLatLng(<%= @event.location.latitude %>, <%= @event.location.longitute %>);
-    map.setCenter(ll, 15);
-    map.addOverlay(new GMarker(ll));
+	var html = "<%=@event.location.name %> <br> <%= @event.location.address %>"
+	var label="<%=@event.name %>"
+	
+	map.setCenter(ll, 15);
+    var marker = createMarker(ll,label,html);
+    map.addOverlay(marker);
+  //map.addControl(new GScaleControl());
+    map.addControl(new GSmallMapControl());
+    map.addControl(new GMapTypeControl());
   }                                                                            
 </script>
+
+
 <% end %>
 <div class='side'>
   <div class='logo'><%= image_tag "rubyholic_4in.jpg", :alt => 'rubyholic logo'\
