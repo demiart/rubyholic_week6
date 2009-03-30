@@ -1,16 +1,27 @@
 <h1>Listing groups</h1>
 
 <table>
+	
+	<tr>
+    <th><%= link_to 'Name',{ :controller => 'groups', :action =>
+    'index', :sort_by => 'name'}, :class => 'clearlink' %> </th>
+    <th><%= link_to 'Website',{ :controller => 'groups', :action =>
+    'index', :sort_by => 'website_url'}, :class => 'clearlink' %> </th>
+    <th><%= link_to 'Description',{ :controller => 'groups', :action =>
+    'index', :sort_by => 'description'}, :class => 'clearlink' %> </th>
+  </tr>
   <tr>
-    <th>Name</th>
-    <th>Website url</th>
-    <th>Description</th>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
+    <th>&nbsp</th>
   </tr>
 
 <!-- alternating row colors -->
 <% row = 0 %>
 
 <% for group in @groups %>
+
+
   <tr <%= "class='row#{row}'" %> >
     <td class='name, clearlink'><%= link_to group.name, group %></td>
 <!-- <%=h group.name %></td> -->

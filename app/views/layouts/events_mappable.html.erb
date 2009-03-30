@@ -76,11 +76,11 @@ function fromhere(i) {
 }
 
 
-  function initialize() {                                                     
+  function initialize() {
 	var map = new GMap2(document.getElementById("map_canvas"));                
     var ll = new GLatLng(<%= @event.location.latitude %>, <%= @event.location.longitute %>);
-	var html = "<%=@event.location.name %> <br> <%= @event.location.address %>"
-	var label="<%=@event.name %>"
+	var html = "<%=h @event.location.name %> <br> <%=h @event.location.address %>"
+	var label="<%=h @event.name %>"
 	
 	map.setCenter(ll, 15);
     var marker = createMarker(ll,label,html);

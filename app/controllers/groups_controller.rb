@@ -8,7 +8,10 @@ class GroupsController < ApplicationController
     if params[:search] then
       @groups = Group.search( params[:search], :page => (params[:page] || 1) )
     else
-      @groups = Group.paginate :page => params[:page], :per_page => 5, :order => 'name'
+      @sort = params[:sort_by] || 'name'
+      @sort = 'name' unless %w(website_url description ).include? @sort
+      
+      @groups = Group.paginate :page => params[:page], :per_page => 5, :order => @sort
     end
 
 
@@ -22,7 +25,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.xml
   def show
     @sort = params[:sort_events_by] || 'start_time'
-    @sort = 'start_time' unless %w(name start_time locationname ).include? @sort
+    @sort = 'start_time' unless %w(name locationname ).include? @sort
 
     @group = Group.find(params[:id])
 
