@@ -40,6 +40,11 @@ th {
   border-bottom: 1px solid #999;
 }
 
+a.clearlink {
+  background-color: #FFF;
+  border: 0;
+}
+
 td {
   padding: 3px;
 }
